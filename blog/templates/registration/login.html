@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Login</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" value="{{ form.username.value|default:'' }}" required>
+            {{ form.username.errors }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" required>
+            {{ form.password.errors }}
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'blog:signup' %}">Sign up here</a>.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
